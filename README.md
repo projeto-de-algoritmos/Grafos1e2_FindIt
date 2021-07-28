@@ -20,7 +20,7 @@ Temas:
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 19/0026758  |  Deivid Alves de Carvalho |
 | xx/xxxxxx  |  xxxx xxxx xxxxx |
 
 ## Sobre 
