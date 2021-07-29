@@ -18,5 +18,18 @@ class Maze:
 
         return graph
 
+    def __checkNeighbour(self, neighbours, x, y):
+        if x >= 0 and x < self.rows and y >= 0 and y < self.columns:
+            neighbours.append((x, y))
+
+    def findNeighbours(self, x, y):
+        neighbours = []
+        self.__checkNeighbour(neighbours, x + 1, y)
+        self.__checkNeighbour(neighbours, x - 1, y)
+        self.__checkNeighbour(neighbours, x, y + 1)
+        self.__checkNeighbour(neighbours, x, y - 1)
+        random.shuffle(neighbours)
+        return neighbours
+
     def nodeVisited(self, node):
         return self.graph[node[0]][node[1]].visited
