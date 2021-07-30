@@ -1,5 +1,11 @@
 from cell import Cell
 import random
+import pygame
+
+WIDTH = 1000
+HEIGHT = 1000
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
 
 class Maze:
     def __init__(self, rows, columns):
@@ -15,8 +21,26 @@ class Maze:
             graph.append([])
             for j in range(self.columns):
                 graph[i].append(Cell(i, j))
-
+                self.__initGame(i, j)
         return graph
+
+    def __initGame(self, x, y):
+        
+      
+
+        WHITE = (255, 255, 255)
+        GREEN = (0, 255, 0,)
+        BLUE = (0, 0, 255)
+        YELLOW = (255 ,255 ,0)
+        w = self.rows
+        x = x*w
+        y = y*w
+        
+        pygame.draw.line(screen, YELLOW, [x, y], [x+w,y]) #up
+        pygame.draw.line(screen, YELLOW, [x + w, y], [x+w, y+w]) #right
+        pygame.draw.line(screen, YELLOW, [x + w, y+w], [x, y+w]) #down
+        pygame.draw.line(screen, YELLOW, [x, y + w], [x, y]) #left
+        pygame.display.update()
 
     def __checkNeighbour(self, neighbours, x, y):
         if x >= 0 and x < self.rows and y >= 0 and y < self.columns:
