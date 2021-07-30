@@ -1,5 +1,3 @@
-
-
 class Cell:
     def __init__(self, x, y):
         self.x = x
@@ -11,7 +9,6 @@ class Cell:
         if self.x - neighbour_x == -1:
             self.walls["down"] = False
             return "down"
-            
         elif self.x - neighbour_x == 1:
             self.walls["up"] = False
             return "up"
