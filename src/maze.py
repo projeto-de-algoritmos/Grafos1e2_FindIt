@@ -32,7 +32,7 @@ class Maze:
         GREEN = (0, 255, 0,)
         BLUE = (0, 0, 255)
         YELLOW = (255 ,255 ,0)
-        w = 40
+        w = 10
         x = x*w
         y = y*w
         
