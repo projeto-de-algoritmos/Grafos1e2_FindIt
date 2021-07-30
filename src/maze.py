@@ -21,10 +21,10 @@ class Maze:
             graph.append([])
             for j in range(self.columns):
                 graph[i].append(Cell(i, j))
-                self.__initGame(i, j)
+                #self.__initGame(i, j)
         return graph
 
-    def __initGame(self, x, y):
+    def __initGame(self, y, x):
         
       
 
@@ -32,14 +32,15 @@ class Maze:
         GREEN = (0, 255, 0,)
         BLUE = (0, 0, 255)
         YELLOW = (255 ,255 ,0)
+        BLACK = (0, 0, 0)
         w = 10
         x = x*w
         y = y*w
         
-        pygame.draw.line(screen, YELLOW, [x, y], [x+w,y]) #up
-        pygame.draw.line(screen, YELLOW, [x + w, y], [x+w, y+w]) #right
-        pygame.draw.line(screen, YELLOW, [x + w, y+w], [x, y+w]) #down
-        pygame.draw.line(screen, YELLOW, [x, y + w], [x, y]) #left
+        pygame.draw.line(screen, WHITE, [x, y], [x+w,y]) #up
+        pygame.draw.line(screen, WHITE, [x+w, y], [x+w, y+w]) #right
+        pygame.draw.line(screen, WHITE, [x + w, y+w], [x, y+w]) #down
+        pygame.draw.line(screen, WHITE, [x, y + w], [x, y]) #left
         pygame.display.update()
 
     def __checkNeighbour(self, neighbours, x, y):

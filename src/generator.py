@@ -37,29 +37,26 @@ def DFSmaze(maze, startPoint):
                     stack.append(n)
     return path
 
-
 def gameUp(y, x):
-    x = x*w
-    y = y*w
-    pygame.draw.rect(screen, BLUE, (x+1, y, w-1, w-1), 0)
+    x = (x*2 + 1)*w
+    y = (y*2 + 1)*w
+    pygame.draw.rect(screen, WHITE, (x, y-w, w, w*2), 0)
   
 def gameDown(y, x):
-    x = x*w 
-    y = y*w
-    pygame.draw.rect(screen, BLUE, (x+1, y+1, w-1, w), 0)
+    x = (x*2 + 1)*w 
+    y = (y*2 + 1)*w
+    pygame.draw.rect(screen, WHITE, (x, y, w, w*2), 0)
 
 def gameLeft(y, x):
-    x = x*w
-    y = y*w
-    pygame.draw.rect(screen, BLUE, (x, y+1, w-1, w-1), 0)
- 
+    x = (x*2 + 1)*w
+    y = (y*2 + 1)*w
+    pygame.draw.rect(screen, WHITE, (x-w, y, w*2, w), 0)
 
 def gameRight(y, x):
-    x = x*w
-    y = y*w
-    pygame.draw.rect(screen, BLUE, (x+1, y+1, w, w-1), 0)
+    x = (x*2 + 1)*w
+    y = (y*2 + 1)*w
+    pygame.draw.rect(screen, WHITE, (x, y, w*2, w), 0)
    
-    
 def gameCurrentNode(node):
     walls = node.walls
 
@@ -73,14 +70,14 @@ def gameCurrentNode(node):
         gameRight(node.x,node.y)
 
     pygame.display.update()
-    #  time.sleep(.05)
+    time.sleep(.005)
 
 pygame.init()
 pygame.mixer.init()
 pygame.display.set_caption("Finder")
 clock = pygame.time.Clock()
 
-maze = Maze(w2, w2)
+maze = Maze(50, 30)
 path = DFSmaze(maze, (0, 0))
 
 for node in path:
