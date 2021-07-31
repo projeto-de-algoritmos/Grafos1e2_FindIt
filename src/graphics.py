@@ -1,30 +1,48 @@
+from constants import COLOR_CHANGE, WIDTH, HEIGHT
 import pygame, time, random
 
-w = 10
-WIDTH = 1000
-HEIGHT = 1000
+w = 6
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-WHITE = (255, 255, 255)
 
-def drawCell(rectTuple):
-    pygame.draw.rect(screen, WHITE, rectTuple, 0)
+def changeColor(color):
+    if color[0:3] == [255, 255, 0] or color[0:3] == [255, 0, 255] or color[0:3] == [0, 255, 255]:
+        color[3] = '-'
+    elif color[0:3] == [255, 0, 0] or color[0:3] == [0, 0, 255] or color[0:3] == [0, 255, 0]:
+        color[3] = '+'
 
-def gameCurrentNode(node):
+    if color[0:3] == [0, 0, 255] or color[0:3] == [255, 255, 0]:
+        color[4] = 0
+    elif color[0:3] == [255, 0, 0] or color[0:3] == [0, 255, 255]:
+        color[4] = 1
+    if color[0:3] == [0, 255, 0] or color[0:3] == [255, 0, 255]:
+        color[4] = 2
+
+    if color[5] == COLOR_CHANGE:
+        color[color[4]] += 1 if color[3] == '+' else -1
+        color[5] = 1
+    else:
+        color[5] += 1
+    return color
+
+def gameCurrentNode(node, color):
     y = (node.x * 2 + 1) * w
     x = (node.y * 2 + 1) * w
     walls = node.walls
+    def drawCell(color, rectTuple):
+        pygame.draw.rect(screen, color, rectTuple, 0)
 
+    drawCell(color, (x, y, w, w))
     if not walls["down"]:
-        drawCell((x, y, w, w*2))
+        drawCell(color, (x, y+w, w, w))
     if not walls["up"]:
-        drawCell((x, y-w, w, w*2))
+        drawCell(color, (x, y-w, w, w))
     if not walls["left"]:
-        drawCell((x-w, y, w*2, w))
+        drawCell(color, (x-w, y, w, w))
     if not walls["right"]:
-        drawCell((x, y, w*2, w))
+        drawCell(color, (x+w, y, w, w))
 
     pygame.display.update()
-    time.sleep(.005)
+    time.sleep(.001)
 
 def initGame():
     pygame.init()
