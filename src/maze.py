@@ -15,7 +15,6 @@ class Maze:
             graph.append([])
             for j in range(self.columns):
                 graph[i].append(Cell(i, j))
-
         return graph
 
     def __checkNeighbour(self, neighbours, x, y):
