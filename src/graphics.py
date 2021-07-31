@@ -1,7 +1,6 @@
-from constants import COLOR_CHANGE, WIDTH, HEIGHT
+from constants import CELL_SIZE, COLOR_CHANGE, WIDTH, HEIGHT
 import pygame, time, random
 
-w = 6
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 def changeColor(color):
@@ -25,21 +24,21 @@ def changeColor(color):
     return color
 
 def gameCurrentNode(node, color):
-    y = (node.x * 2 + 1) * w
-    x = (node.y * 2 + 1) * w
+    y = (node.x * 2 + 1) * CELL_SIZE
+    x = (node.y * 2 + 1) * CELL_SIZE
     walls = node.walls
     def drawCell(color, rectTuple):
         pygame.draw.rect(screen, color, rectTuple, 0)
 
-    drawCell(color, (x, y, w, w))
+    drawCell(color, (x, y, CELL_SIZE, CELL_SIZE))
     if not walls["down"]:
-        drawCell(color, (x, y+w, w, w))
+        drawCell(color, (x, y+CELL_SIZE, CELL_SIZE, CELL_SIZE))
     if not walls["up"]:
-        drawCell(color, (x, y-w, w, w))
+        drawCell(color, (x, y-CELL_SIZE, CELL_SIZE, CELL_SIZE))
     if not walls["left"]:
-        drawCell(color, (x-w, y, w, w))
+        drawCell(color, (x-CELL_SIZE, y, CELL_SIZE, CELL_SIZE))
     if not walls["right"]:
-        drawCell(color, (x+w, y, w, w))
+        drawCell(color, (x+CELL_SIZE, y, CELL_SIZE, CELL_SIZE))
 
     pygame.display.update()
     time.sleep(.001)

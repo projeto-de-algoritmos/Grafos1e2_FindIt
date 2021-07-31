@@ -1,6 +1,6 @@
 from maze import Maze
 from graphics import *
-from constants import FPS, RANDOM_STACK
+from constants import FPS, RANDOM_STACK, SIZE, START
 import pygame , time, random
 
 def DFSmaze(maze, startPoint):
@@ -34,8 +34,8 @@ def DFSmaze(maze, startPoint):
     return path
 
 clock = initGame()
-maze = Maze(60, 60)
-path = DFSmaze(maze, (0, 0))
+maze = Maze(SIZE)
+path = DFSmaze(maze, START)
 
 running = True
 while running:

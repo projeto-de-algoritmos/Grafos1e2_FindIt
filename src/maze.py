@@ -2,9 +2,8 @@ from cell import Cell
 import random
 
 class Maze:
-    def __init__(self, rows, columns):
-        self.rows = rows
-        self.columns = columns
+    def __init__(self, size):
+        self.rows, self.columns = size
         self.path = []
         self.graph = self.__initGraph()
 

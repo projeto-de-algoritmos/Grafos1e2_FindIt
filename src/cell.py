@@ -18,5 +18,3 @@ class Cell:
         elif self.y - neighbour_y == 1:
             self.walls["left"] = False
             return "left"
-
-
