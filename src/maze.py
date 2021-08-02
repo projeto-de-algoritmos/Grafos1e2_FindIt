@@ -1,10 +1,10 @@
 from cell import Cell
+import time
 import random
 
 class Maze:
     def __init__(self, size):
         self.rows, self.columns = size
-        self.path = []
         self.graph = self.__initGraph()
 
     def __initGraph(self):
@@ -28,6 +28,18 @@ class Maze:
         self.__checkNeighbour(neighbours, x, y - 1)
         random.shuffle(neighbours)
         return neighbours
+
+    def findPossiblePath(self, x, y):
+        possiblePath = []
+        if not self.graph[x][y].walls['up']:
+            possiblePath.append((x - 1, y))
+        if not self.graph[x][y].walls['down']:
+            possiblePath.append((x + 1, y))
+        if not self.graph[x][y].walls['right']:
+            possiblePath.append((x, y + 1))
+        if not self.graph[x][y].walls['left']:
+            possiblePath.append((x, y - 1))
+        return possiblePath
 
     def nodeVisited(self, node):
         return self.graph[node[0]][node[1]].visited

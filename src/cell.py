@@ -3,6 +3,7 @@ class Cell:
         self.x = x
         self.y = y
         self.visited = False
+        self.player = False
         self.walls = {"up": True, "down": True, "right": True, "left": True}
 
     def breackWalls(self, neighbour_x, neighbour_y):

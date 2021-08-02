@@ -1,18 +1,17 @@
 from maze import Maze
+from solver import mazeSolver
 from graphics import *
 from constants import FPS, RANDOM_STACK, SIZE, START
 import pygame , time, random
 
-def DFSmaze(maze, startPoint):
+def mazeGenerator(maze, startPoint):
     x_c, y_c = startPoint
-    path = []
     stack = []
     maze.graph[x_c][y_c].visited = True
 
     stack.append((x_c, y_c))
-    path.append((x_c, y_c))
     RGB = changeColor([60, 0, 255, '+', 0, 1])
-    gameCurrentNode(maze.graph[x_c][y_c], RGB[0:3])
+    gameDrawMaze(maze.graph[x_c][y_c], [255, 255, 255])
     while stack:
         if RANDOM_STACK:
             random.shuffle(stack)
@@ -27,15 +26,16 @@ def DFSmaze(maze, startPoint):
                     maze.graph[x_c][y_c].breackWalls(x_n, y_n)
                     maze.graph[x_n][y_n].breackWalls(x_c, y_c)
                     maze.graph[n[0]][n[1]].visited = True
-                    gameCurrentNode(maze.graph[x_n][y_n], RGB[0:3])
-                    path.append(n)
+                    gameDrawMaze(maze.graph[x_n][y_n], RGB[0:3])
                     stack.append(n)
-
-    return path
 
 clock = initGame()
 maze = Maze(SIZE)
-path = DFSmaze(maze, START)
+mazeGenerator(maze, START)
+path = mazeSolver(maze, (0, 0), (9, 9))
+
+#  for node in range(1, len(path), 2):
+#      gameDrawSolve(path[node-1], path[node], [255, 0, 0])
 
 running = True
 while running:

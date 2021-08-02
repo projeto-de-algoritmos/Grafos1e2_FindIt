@@ -23,12 +23,13 @@ def changeColor(color):
         color[5] += 1
     return color
 
-def gameCurrentNode(node, color):
+def drawCell(color, rectTuple):
+    pygame.draw.rect(screen, color, rectTuple, 0)
+
+def gameDrawMaze(node, color):
     y = (node.x * 2 + 1) * CELL_SIZE
     x = (node.y * 2 + 1) * CELL_SIZE
     walls = node.walls
-    def drawCell(color, rectTuple):
-        pygame.draw.rect(screen, color, rectTuple, 0)
 
     drawCell(color, (x, y, CELL_SIZE, CELL_SIZE))
     if not walls["down"]:
@@ -39,6 +40,25 @@ def gameCurrentNode(node, color):
         drawCell(color, (x-CELL_SIZE, y, CELL_SIZE, CELL_SIZE))
     if not walls["right"]:
         drawCell(color, (x+CELL_SIZE, y, CELL_SIZE, CELL_SIZE))
+
+    pygame.display.update()
+    time.sleep(.001)
+
+def gameDrawSolve(node_i, node_f, color):
+    y_i = (node_i[0] * 2 + 1) * CELL_SIZE
+    x_i = (node_i[1] * 2 + 1) * CELL_SIZE
+    y_f = (node_f[0] * 2 + 1) * CELL_SIZE
+    x_f = (node_f[1] * 2 + 1) * CELL_SIZE
+    drawCell(color, (x_i, y_i, CELL_SIZE, CELL_SIZE))
+    drawCell(color, (x_f, y_f, CELL_SIZE, CELL_SIZE))
+    if x_f < x_i:
+        drawCell(color, (x_f+CELL_SIZE, y_f, CELL_SIZE, CELL_SIZE))
+    elif y_f < y_i:
+        drawCell(color, (x_f, y_f+CELL_SIZE, CELL_SIZE, CELL_SIZE))
+    elif x_f > x_i:
+        drawCell(color, (x_i+CELL_SIZE, y_f, CELL_SIZE, CELL_SIZE))
+    elif y_f > y_i:
+        drawCell(color, (x_f, y_i+CELL_SIZE, CELL_SIZE, CELL_SIZE))
 
     pygame.display.update()
     time.sleep(.001)
