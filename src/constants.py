@@ -1,5 +1,6 @@
-RANDOM_STACK = True
-SIZE = (10, 10)
+RANDOM_STACK = False
+BFS_SEARCH = False
+SIZE = (50, 50)
 START = (0, 0)
 
 CELL_SIZE = 6
