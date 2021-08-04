@@ -1,5 +1,6 @@
-RANDOM_STACK = True
-SIZE = (10, 10)
+
+RANDOM_STACK = False
+SIZE = (48, 65)
 START = (0, 0)
 
 CELL_SIZE = 6
