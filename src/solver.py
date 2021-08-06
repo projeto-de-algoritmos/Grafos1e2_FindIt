@@ -1,5 +1,5 @@
 from graphics import *
-from constants import *
+from constants import BFS_SEARCH
 
 def mazeSolver(maze, startPoint, finishPoint):
     x_c, y_c = startPoint
@@ -7,15 +7,16 @@ def mazeSolver(maze, startPoint, finishPoint):
     stack = []
     maze.graph[x_c][y_c].player = True
 
-    stack.append((x_c, y_c))
+    stack.append(((x_c, y_c), (x_c, y_c)))
+    path.append(((x_c, y_c), (x_c, y_c)))
     while stack:
-        if False:
-            random.shuffle(stack)
+        a, c = stack.pop(0 if BFS_SEARCH else -1)
+        x_c, y_c = c
+        if not maze.graph[x_c][y_c].player:
+            maze.graph[x_c][y_c].player = True
+            path.insert(0, (a, c))
 
-        x_c, y_c = stack.pop()
-        path.append((x_c, y_c))
         if (x_c, y_c) == finishPoint:
-            #  print(path)
             return path
 
         possiblePath = maze.findPossiblePath(x_c, y_c)
@@ -23,6 +24,5 @@ def mazeSolver(maze, startPoint, finishPoint):
             for n in possiblePath:
                 if not maze.graph[n[0]][n[1]].player:
                     x_n, y_n = n
-                    maze.graph[x_n][y_n].player = True
                     gameDrawSolve((x_c, y_c), (x_n, y_n), [255, 255, 255])
-                    stack.append(n)
+                    stack.append([(x_c, y_c), n])

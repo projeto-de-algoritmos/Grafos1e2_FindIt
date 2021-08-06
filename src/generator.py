@@ -44,8 +44,12 @@ elif not return_Menu[0] and return_Menu[1]:
 
 maze = Maze(SIZE)
 mazeGenerator(maze, START)
-path = mazeSolver(maze, (0, 0), (9, 9))
+path = mazeSolver(maze, (0, 0), (49, 49))
 
+node = path[0]
+while node[1] != (0, 0):
+    gameDrawSolve(node[0], node[1], [255, 0, 0])
+    node = [item for item in path if item[1] == node[0]][0]
 
 
 #for node in range(1, len(path), 2):
