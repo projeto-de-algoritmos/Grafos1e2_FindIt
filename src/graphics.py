@@ -2,8 +2,8 @@ from pygame.constants import MOUSEBUTTONDOWN
 from constants import CELL_SIZE, COLOR_CHANGE, WIDTH, HEIGHT
 import pygame, time, random, sys
 
-screenMaze = pygame.display.set_mode((WIDTH, HEIGHT))
 
+screenMenu = pygame.display.set_mode((800, 600))
 click = False
 
 def changeColor(color):
@@ -27,7 +27,7 @@ def changeColor(color):
     return color
 
 def drawCell(color, rectTuple):
-    pygame.draw.rect(screenMaze, color, rectTuple, 0)
+    pygame.draw.rect(screenMenu, color, rectTuple, 0)
 
 def gameDrawMaze(node, color):
     y = (node.x * 2 + 1) * CELL_SIZE
@@ -81,13 +81,12 @@ def draw_Text(text, font, color, surface, x, y):
 
 
 def menu():
-    screenMenu = pygame.display.set_mode((800, 600))
+    pygame.display.set_mode((800, 600))
     click = False
     maze_DFS = maze_BFS = solver_DFS = solver_BFS = False
 
     running = True
     font = pygame.font.SysFont(0, 60)
-    
     draw_Text('Gerador de labirinto', font, (255, 255, 255), screenMenu, 185 , 5)
 
     button_dfs = pygame.Rect(50, 70, 50, 50)
@@ -197,6 +196,29 @@ def menu():
                     else:
                         pygame.draw.rect(screenMenu, (255, 0, 0), button_Start)
                         pygame.display.update()
-                                    
+
+def restart():
+    restart_button = pygame.Rect(50, HEIGHT + 20, 135, 55)
+    pygame.draw.rect(screenMenu, (255, 255, 255), restart_button)
+    restart_button = pygame.Rect(55, HEIGHT + 25, 125, 45)
+    pygame.draw.rect(screenMenu, (0, 0, 0), restart_button)
+
+    font = pygame.font.SysFont(0, 60)
+    draw_Text('Menu', font, (255, 255, 255), screenMenu, 60 , HEIGHT + 30)
+
+    pygame.display.update()
+
+    running = True
+    while running:
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_x, mouse_y = pygame.mouse.get_pos()
+                    if restart_button.collidepoint((mouse_x,mouse_y)):
+                        return False
+
     
         

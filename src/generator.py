@@ -5,8 +5,6 @@ from constants import FPS, SIZE, START
 import pygame , time, random, threading
 
 
-
-
 def mazeGenerator(maze, startPoint, RANDOM_STACK):
     x_c, y_c = startPoint
     stack = []
@@ -31,33 +29,6 @@ def mazeGenerator(maze, startPoint, RANDOM_STACK):
                     maze.graph[n[0]][n[1]].visited = True
                     gameDrawMaze(maze.graph[x_n][y_n], RGB[0:3])
                     stack.append(n)
-
-clock = initGame()
-
-return_Menu = menu()
-
-RANDOM_STACK = return_Menu[0]
-BFS_SEARCH = return_Menu[1]
-
-
-pygame.display.set_mode((WIDTH, HEIGHT))
-
-maze = Maze(SIZE)
-mazeGenerator(maze, START, RANDOM_STACK)
-path = mazeSolver(maze, (0, 0), (79, 39), BFS_SEARCH)
-
-node = path[0]
-while node[1] != (0, 0):
-    gameDrawSolve(node[0], node[1], [255, 0, 0])
-    node = [item for item in path if item[1] == node[0]][0]
-
-
-running = True
-while running:
-    clock.tick(FPS)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
 
     
     

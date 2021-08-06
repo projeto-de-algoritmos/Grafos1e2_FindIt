@@ -1,5 +1,5 @@
 
-SIZE = (80, 40)
+SIZE = (50, 80)
 START = (0, 0)
 
 CELL_SIZE = 6
