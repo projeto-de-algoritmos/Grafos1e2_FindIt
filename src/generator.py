@@ -1,13 +1,13 @@
 from maze import Maze
 from solver import mazeSolver
 from graphics import *
-from constants import FPS, RANDOM_STACK, SIZE, START
+from constants import FPS, SIZE, START
 import pygame , time, random, threading
 
 
 
 
-def mazeGenerator(maze, startPoint):
+def mazeGenerator(maze, startPoint, RANDOM_STACK):
     x_c, y_c = startPoint
     stack = []
     maze.graph[x_c][y_c].visited = True
@@ -32,19 +32,19 @@ def mazeGenerator(maze, startPoint):
                     gameDrawMaze(maze.graph[x_n][y_n], RGB[0:3])
                     stack.append(n)
 
-pygame.init()
-pygame.mixer.init()
-pygame.font.init()
+clock = initGame()
+
 return_Menu = menu()
 
-if return_Menu[0] and not return_Menu[1]:
-    RANDOM_STACK = False
-elif not return_Menu[0] and return_Menu[1]:
-    RANDOM_STACK = True
+RANDOM_STACK = return_Menu[0]
+BFS_SEARCH = return_Menu[1]
+
+
+pygame.display.set_mode((WIDTH, HEIGHT))
 
 maze = Maze(SIZE)
-mazeGenerator(maze, START)
-path = mazeSolver(maze, (0, 0), (49, 49))
+mazeGenerator(maze, START, RANDOM_STACK)
+path = mazeSolver(maze, (0, 0), (79, 39), BFS_SEARCH)
 
 node = path[0]
 while node[1] != (0, 0):
@@ -52,9 +52,12 @@ while node[1] != (0, 0):
     node = [item for item in path if item[1] == node[0]][0]
 
 
-#for node in range(1, len(path), 2):
-#    gameDrawSolve(path[node-1], path[node], [255, 0, 0])
-
+running = True
+while running:
+    clock.tick(FPS)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
     
     

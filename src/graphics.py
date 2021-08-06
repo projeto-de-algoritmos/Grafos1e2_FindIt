@@ -2,8 +2,8 @@ from pygame.constants import MOUSEBUTTONDOWN
 from constants import CELL_SIZE, COLOR_CHANGE, WIDTH, HEIGHT
 import pygame, time, random, sys
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-screenMenu = pygame.display.set_mode((800, 600))
+screenMaze = pygame.display.set_mode((WIDTH, HEIGHT))
+
 click = False
 
 def changeColor(color):
@@ -27,7 +27,7 @@ def changeColor(color):
     return color
 
 def drawCell(color, rectTuple):
-    pygame.draw.rect(screen, color, rectTuple, 0)
+    pygame.draw.rect(screenMaze, color, rectTuple, 0)
 
 def gameDrawMaze(node, color):
     y = (node.x * 2 + 1) * CELL_SIZE
@@ -67,7 +67,9 @@ def gameDrawSolve(node_i, node_f, color):
     time.sleep(.001)
 
 def initGame():
-    
+    pygame.init()
+    pygame.mixer.init()
+    pygame.font.init()
     pygame.display.set_caption("Finder")
     return pygame.time.Clock()
 
@@ -79,18 +81,22 @@ def draw_Text(text, font, color, surface, x, y):
 
 
 def menu():
+    screenMenu = pygame.display.set_mode((800, 600))
     click = False
-    green_DFS = False
-    green_BFS = False
+    maze_DFS = maze_BFS = solver_DFS = solver_BFS = False
+
     running = True
     font = pygame.font.SysFont(0, 60)
-    button_dfs = pygame.Rect(50, 100, 50, 50)
-    button_bfs = pygame.Rect(50, 200, 50, 50)
+    
+    draw_Text('Gerador de labirinto', font, (255, 255, 255), screenMenu, 185 , 5)
+
+    button_dfs = pygame.Rect(50, 70, 50, 50)
+    button_bfs = pygame.Rect(50, 140, 50, 50)
     pygame.draw.rect(screenMenu, (255, 255, 255), button_dfs)
     pygame.draw.rect(screenMenu, (255, 255, 255), button_bfs)
 
-    button_dfs = pygame.Rect(55, 105, 40, 40)
-    button_bfs = pygame.Rect(55, 205, 40, 40)
+    button_dfs = pygame.Rect(55, 75, 40, 40)
+    button_bfs = pygame.Rect(55, 145, 40, 40)
     pygame.draw.rect(screenMenu, (0, 0, 0), button_dfs)
     pygame.draw.rect(screenMenu, (0, 0, 0), button_bfs)
 
@@ -98,8 +104,26 @@ def menu():
     pygame.draw.rect(screenMenu, (255, 0, 0), button_Start)
     draw_Text('Começar', font, (255, 255, 255), screenMenu, 470, 450)
 
-    draw_Text('DFS', font, (255, 255, 255), screenMenu, 105, 105)
-    draw_Text('BFS', font, (255, 255, 255), screenMenu, 105, 205)
+    draw_Text('DFS', font, (255, 255, 255), screenMenu, 105, 75)
+    draw_Text('BFS', font, (255, 255, 255), screenMenu, 105, 145)
+
+
+
+    draw_Text('Solucionador de labirinto', font, (255, 255, 255), screenMenu, 145, 250)
+
+    button_dfs_solver = pygame.Rect(50, 320, 50, 50)
+    button_bfs_solver = pygame.Rect(50, 390, 50, 50)
+    pygame.draw.rect(screenMenu, (255, 255, 255), button_dfs_solver)
+    pygame.draw.rect(screenMenu, (255, 255, 255), button_bfs_solver)
+
+    button_dfs_solver = pygame.Rect(55, 325, 40, 40)
+    button_bfs_solver = pygame.Rect(55, 395, 40, 40)
+    pygame.draw.rect(screenMenu, (0, 0, 0), button_dfs_solver)
+    pygame.draw.rect(screenMenu, (0, 0, 0), button_bfs_solver)
+
+    draw_Text('DFS', font, (255, 255, 255), screenMenu, 105, 325)
+    draw_Text('BFS', font, (255, 255, 255), screenMenu, 105, 395)
+
 
     while running:
         pygame.display.update()
@@ -113,33 +137,63 @@ def menu():
                     if button_dfs.collidepoint((mouse_x,mouse_y)):
                         if click:
                             click = False
-                            if not green_DFS:
+                            if not maze_DFS:
                                 pygame.draw.rect(screenMenu, (0, 255, 0), button_dfs)
+                                pygame.draw.rect(screenMenu, (0, 0, 0), button_bfs)
                                 pygame.display.update()
-                                green_DFS = True
+                                maze_DFS = True
+                                maze_BFS = False
                             else:
                                 pygame.draw.rect(screenMenu, (0, 0, 0), button_dfs)
                                 pygame.display.update()
-                                green_DFS = False
+                                maze_DFS = False
                     if button_bfs.collidepoint((mouse_x,mouse_y)):
                         if click:
                             click = False
-                            if not green_BFS:
+                            if not maze_BFS:
                                 pygame.draw.rect(screenMenu, (0, 255, 0), button_bfs)
+                                pygame.draw.rect(screenMenu, (0, 0, 0), button_dfs)
                                 pygame.display.update()
-                                green_BFS = True
+                                maze_BFS = True
+                                maze_DFS = False
                             else:
                                 pygame.draw.rect(screenMenu, (0, 0, 0), button_bfs)
                                 pygame.display.update()
-                                green_BFS = False
-                    if green_BFS or green_DFS:
+                                maze_BFS = False
+                    if button_dfs_solver.collidepoint((mouse_x,mouse_y)):
+                        if click:
+                            click = False
+                            if not solver_DFS:
+                                pygame.draw.rect(screenMenu, (0, 255, 0), button_dfs_solver)
+                                pygame.draw.rect(screenMenu, (0, 0, 0), button_bfs_solver)
+                                pygame.display.update()
+                                solver_DFS = True
+                                solver_BFS = False
+                            else:
+                                pygame.draw.rect(screenMenu, (0, 0, 0), button_dfs_solver)
+                                pygame.display.update()
+                                solver_DFS = False
+                    if button_bfs_solver.collidepoint((mouse_x,mouse_y)):
+                        if click:
+                            click = False
+                            if not solver_BFS:
+                                pygame.draw.rect(screenMenu, (0, 255, 0), button_bfs_solver)
+                                pygame.draw.rect(screenMenu, (0, 0, 0), button_dfs_solver)
+                                pygame.display.update()
+                                solver_BFS = True
+                                solver_DFS = False
+                            else:
+                                pygame.draw.rect(screenMenu, (0, 0, 0), button_bfs_solver)
+                                pygame.display.update()
+                                solver_BFS = False
+                    if (solver_BFS or solver_DFS) and (maze_BFS or maze_DFS):
                         pygame.draw.rect(screenMenu, (0, 255, 0), button_Start)
                         pygame.display.update()
                         
                         if button_Start.collidepoint((mouse_x,mouse_y)):
                             if click:
-                                screen.fill((0,0,0))
-                                return green_DFS, green_BFS
+                                screenMenu.fill((0,0,0))
+                                return maze_BFS, solver_BFS
                     else:
                         pygame.draw.rect(screenMenu, (255, 0, 0), button_Start)
                         pygame.display.update()

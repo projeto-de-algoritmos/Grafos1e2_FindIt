@@ -1,7 +1,8 @@
 from graphics import *
-from constants import BFS_SEARCH
 
-def mazeSolver(maze, startPoint, finishPoint):
+
+
+def mazeSolver(maze, startPoint, finishPoint, BFS_SEARCH):
     x_c, y_c = startPoint
     path = []
     stack = []
