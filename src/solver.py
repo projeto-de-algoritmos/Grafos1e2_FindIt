@@ -1,7 +1,5 @@
 from graphics import *
 
-
-
 def mazeSolver(maze, startPoint, finishPoint, BFS_SEARCH):
     x_c, y_c = startPoint
     path = []

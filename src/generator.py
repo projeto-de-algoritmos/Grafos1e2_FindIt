@@ -1,9 +1,5 @@
-from maze import Maze
-from solver import mazeSolver
 from graphics import *
-from constants import FPS, SIZE, START
-import pygame , time, random, threading
-
+import random
 
 def mazeGenerator(maze, startPoint, RANDOM_STACK):
     x_c, y_c = startPoint
@@ -29,6 +25,3 @@ def mazeGenerator(maze, startPoint, RANDOM_STACK):
                     maze.graph[n[0]][n[1]].visited = True
                     gameDrawMaze(maze.graph[x_n][y_n], RGB[0:3])
                     stack.append(n)
-
-    
-    

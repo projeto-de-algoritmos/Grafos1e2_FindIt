@@ -1,7 +1,6 @@
 from pygame.constants import MOUSEBUTTONDOWN
-from constants import CELL_SIZE, COLOR_CHANGE, WIDTH, HEIGHT
-import pygame, time, random, sys
-
+from constants import CELL_SIZE, COLOR_CHANGE, HEIGHT
+import pygame, time
 
 screenMenu = pygame.display.set_mode((800, 600))
 click = False
@@ -76,9 +75,8 @@ def initGame():
 def draw_Text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
-    textrect.topleft = (x,y)
+    textrect.topleft = (x, y)
     surface.blit(textobj, textrect)
-
 
 def menu():
     pygame.display.set_mode((800, 600))
@@ -87,7 +85,7 @@ def menu():
 
     running = True
     font = pygame.font.SysFont(0, 60)
-    draw_Text('Gerador de labirinto', font, (255, 255, 255), screenMenu, 185 , 5)
+    draw_Text('Gerador de labirinto', font, (255, 255, 255), screenMenu, 185, 5)
 
     button_dfs = pygame.Rect(50, 70, 50, 50)
     button_bfs = pygame.Rect(50, 140, 50, 50)
@@ -106,8 +104,6 @@ def menu():
     draw_Text('DFS', font, (255, 255, 255), screenMenu, 105, 75)
     draw_Text('BFS', font, (255, 255, 255), screenMenu, 105, 145)
 
-
-
     draw_Text('Solucionador de labirinto', font, (255, 255, 255), screenMenu, 145, 250)
 
     button_dfs_solver = pygame.Rect(50, 320, 50, 50)
@@ -123,7 +119,6 @@ def menu():
     draw_Text('DFS', font, (255, 255, 255), screenMenu, 105, 325)
     draw_Text('BFS', font, (255, 255, 255), screenMenu, 105, 395)
 
-
     while running:
         pygame.display.update()
         for event in pygame.event.get():
@@ -133,7 +128,7 @@ def menu():
                 if event.button == 1:
                     click = True
                     mouse_x, mouse_y = pygame.mouse.get_pos()
-                    if button_dfs.collidepoint((mouse_x,mouse_y)):
+                    if button_dfs.collidepoint((mouse_x, mouse_y)):
                         if click:
                             click = False
                             if not maze_DFS:
@@ -146,7 +141,7 @@ def menu():
                                 pygame.draw.rect(screenMenu, (0, 0, 0), button_dfs)
                                 pygame.display.update()
                                 maze_DFS = False
-                    if button_bfs.collidepoint((mouse_x,mouse_y)):
+                    if button_bfs.collidepoint((mouse_x, mouse_y)):
                         if click:
                             click = False
                             if not maze_BFS:
@@ -159,7 +154,7 @@ def menu():
                                 pygame.draw.rect(screenMenu, (0, 0, 0), button_bfs)
                                 pygame.display.update()
                                 maze_BFS = False
-                    if button_dfs_solver.collidepoint((mouse_x,mouse_y)):
+                    if button_dfs_solver.collidepoint((mouse_x, mouse_y)):
                         if click:
                             click = False
                             if not solver_DFS:
@@ -172,7 +167,7 @@ def menu():
                                 pygame.draw.rect(screenMenu, (0, 0, 0), button_dfs_solver)
                                 pygame.display.update()
                                 solver_DFS = False
-                    if button_bfs_solver.collidepoint((mouse_x,mouse_y)):
+                    if button_bfs_solver.collidepoint((mouse_x, mouse_y)):
                         if click:
                             click = False
                             if not solver_BFS:
@@ -189,9 +184,9 @@ def menu():
                         pygame.draw.rect(screenMenu, (0, 255, 0), button_Start)
                         pygame.display.update()
                         
-                        if button_Start.collidepoint((mouse_x,mouse_y)):
+                        if button_Start.collidepoint((mouse_x, mouse_y)):
                             if click:
-                                screenMenu.fill((0,0,0))
+                                screenMenu.fill((0, 0, 0))
                                 return maze_BFS, solver_BFS
                     else:
                         pygame.draw.rect(screenMenu, (255, 0, 0), button_Start)
@@ -204,7 +199,7 @@ def restart():
     pygame.draw.rect(screenMenu, (0, 0, 0), restart_button)
 
     font = pygame.font.SysFont(0, 60)
-    draw_Text('Menu', font, (255, 255, 255), screenMenu, 60 , HEIGHT + 30)
+    draw_Text('Menu', font, (255, 255, 255), screenMenu, 60, HEIGHT + 30)
 
     pygame.display.update()
 
@@ -217,8 +212,6 @@ def restart():
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:
                     mouse_x, mouse_y = pygame.mouse.get_pos()
-                    if restart_button.collidepoint((mouse_x,mouse_y)):
+                    if restart_button.collidepoint((mouse_x, mouse_y)):
                         return False
-
-    
-        
+    return True
