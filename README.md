@@ -18,7 +18,6 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 ## Instalação 
 **Linguagem**: Python<br>
 **Framework**: (caso exista)<br>
-Pygame
 ## Uso 
 Após dar run na main.py, é necessário escolher a opção de gerador do labirinto e solucionador do labirinto.
 
