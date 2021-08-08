@@ -17,14 +17,14 @@
 ## Screenshots
 ### Gerando labirintos (dfs e bfs)
 <p>
-    <img src="assets/dfsMaze.gif" width="450" height="450" />
-    <img src="assets/bfsMaze.gif" width="450" height="450" />
+    <img src="assets/dfsMaze.gif" width="400" height="400" />
+    <img src="assets/bfsMaze.gif" width="400" height="400" />
 </p>
 
 ### Resolvendo labirintos (dfs em uma bfs e bfs em uma dfs)
 <p>
-    <img src="assets/dfsSolver.gif" width="450" height="450" />
-    <img src="assets/bfsSolver.gif" width="450" height="450" />
+    <img src="assets/dfsSolver.gif" width="400" height="400" />
+    <img src="assets/bfsSolver.gif" width="400" height="400" />
 </p>
 
 ## Instalação 
