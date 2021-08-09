@@ -1,5 +1,4 @@
 from cell import Cell
-import time
 import random
 
 class Maze:
