@@ -4,34 +4,50 @@ from constants import SIZE, START, WIDTH, HEIGHT
 from graphics import *
 from generator import *
 import pygame
+from time import sleep
 
 def main():
     initGame()
-    exit = False
+    pygame.display.set_mode((WIDTH, HEIGHT))
+    maze = Maze(SIZE)
+    primGenerator(maze, START)
+    path = mazeSolver(maze, START, (79, 79), True)
 
-    while not exit:
-        return_Menu = menu()
-        if not return_Menu:
-            break
+    node = path[0]
+    while node[1] != START:
+        gameDrawSolve(node[0], node[1], [255, 0, 0])
+        node = [item for item in path if item[1] == node[0]][0]
 
-        RANDOM_STACK = return_Menu[0]
-        BFS_SEARCH = return_Menu[1]
+    while True:
+        sleep(1)
+
+#  def main():
+#      initGame()
+#      exit = False
+
+#      while not exit:
+#          return_Menu = menu()
+#          if not return_Menu:
+#              break
+
+#          RANDOM_STACK = return_Menu[0]
+#          BFS_SEARCH = return_Menu[1]
         
-        pygame.display.set_mode((WIDTH, HEIGHT + 100))
+#          pygame.display.set_mode((WIDTH, HEIGHT + 100))
 
-        maze = Maze(SIZE)
-        mazeGenerator(maze, START, RANDOM_STACK)
-        path = mazeSolver(maze, START, (49, 79), BFS_SEARCH)
+#          maze = Maze(SIZE)
+#          mazeGenerator(maze, START, RANDOM_STACK)
+#          path = mazeSolver(maze, START, (49, 79), BFS_SEARCH)
 
-        node = path[0]
-        while node[1] != START:
-            gameDrawSolve(node[0], node[1], [255, 0, 0])
-            node = [item for item in path if item[1] == node[0]][0]
+#          node = path[0]
+#          while node[1] != START:
+#              gameDrawSolve(node[0], node[1], [255, 0, 0])
+#              node = [item for item in path if item[1] == node[0]][0]
         
-        exit = restart()
+#          exit = restart()
 
-        if exit:
-            break
+#          if exit:
+#              break
 
 if __name__ == '__main__':
     main()
