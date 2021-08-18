@@ -7,8 +7,6 @@ import pygame
 from time import sleep
 import os
 def main():
-    # os.environ['SDL_VIDEO_WINDOW_POS'] = str(WIDTH) + "," + str(HEIGHT)
-    # os.environ['SDL_VIDEO_CENTERED'] = '1'
     initGame()
     pygame.display.set_mode((WIDTH, HEIGHT))
     maze = Maze(SIZE)
@@ -53,4 +51,5 @@ def main():
 #              break
 
 if __name__ == '__main__':
+    os.environ['SDL_VIDEO_CENTERED'] = '1'
     main()
