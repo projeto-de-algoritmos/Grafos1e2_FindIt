@@ -10,8 +10,8 @@ def main():
     initGame()
     pygame.display.set_mode((WIDTH, HEIGHT))
     maze = Maze(SIZE)
-    primGenerator(maze, START)
-    path = mazeSolver(maze, START, (79, 79), True)
+    kruskalGenerator(maze)
+    path = mazeSolver(maze, START, (49, 49), False)
 
     node = path[0]
     while node[1] != START:
