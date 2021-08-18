@@ -66,7 +66,6 @@ def kruskalGenerator(maze):
     heap = []
     matrizUnionFind = []
     RGB = changeColor([60, 0, 255, '+', 0, 1])
-
     for i in range(maze.rows):
         matrizUnionFind.append([])
         for j in range(maze.columns):
@@ -75,10 +74,9 @@ def kruskalGenerator(maze):
             for n in neighbours:
                 hp.heappush(heap, (maze.graph[n[0][0]][n[0][1]].weight[n[1]], (i,j), n[0]))
     
-
     while heap:
         _, (x_c, y_c), (x_n, y_n) = hp.heappop(heap)
-        print("A = {}, B = {}".format((x_c, y_c), (x_n,y_n)))
+        #print("A = {}, B = {}".format((x_c, y_c), (x_n,y_n)))
 
         a = find(matrizUnionFind, (x_c, y_c))
         b = find(matrizUnionFind, (x_n, y_n))
@@ -86,15 +84,7 @@ def kruskalGenerator(maze):
         if a != b:
             maze.graph[x_c][y_c].breackWalls(x_n, y_n)
             maze.graph[x_n][y_n].breackWalls(x_c, y_c)
-            
             union(matrizUnionFind, a, b)
-            if maze.graph[x_n][y_n].visited:
-                gameDrawMaze(maze.graph[x_n][y_n], RGB[0:3])
-
             gameDrawMaze(maze.graph[x_c][y_c], RGB[0:3])
-            
-
-            maze.graph[x_n][y_n].visited = True
+            gameDrawMaze(maze.graph[x_n][y_n], RGB[0:3])
             RGB = changeColor(RGB)
-    
-    

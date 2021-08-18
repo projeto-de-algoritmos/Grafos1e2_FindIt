@@ -5,13 +5,15 @@ from graphics import *
 from generator import *
 import pygame
 from time import sleep
-
+import os
 def main():
+    # os.environ['SDL_VIDEO_WINDOW_POS'] = str(WIDTH) + "," + str(HEIGHT)
+    # os.environ['SDL_VIDEO_CENTERED'] = '1'
     initGame()
     pygame.display.set_mode((WIDTH, HEIGHT))
     maze = Maze(SIZE)
-    #primGenerator(maze, START)
-    kruskalGenerator(maze)
+    primGenerator(maze, START)
+    #kruskalGenerator(maze)
     path = mazeSolver(maze, START, FINAL , True)
 
     node = path[0]

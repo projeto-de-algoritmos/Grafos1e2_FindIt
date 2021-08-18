@@ -1,8 +1,9 @@
-SIZE = (55, 100)
-START = (0, 0)
-FINAL = (54,99)
 
-CELL_SIZE = 6
+SIZE = (100, 130)
+START = (0, 0)
+FINAL = (SIZE[0]-1,SIZE[1]-1)
+
+CELL_SIZE = 4
 COLOR_CHANGE = 3
 
 FPS = 30
