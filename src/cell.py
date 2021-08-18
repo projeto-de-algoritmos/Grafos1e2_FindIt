@@ -7,7 +7,7 @@ class Cell:
         self.visited = False
         self.player = False
         self.walls = {"up": True, "down": True, "right": True, "left": True}
-        self.weight = {"up": randint(0,100), "down": randint(0,100), "right": randint(0,100), "left": randint(0,100)}
+        self.weight = {"up": randint(0,5000), "down": randint(0,5000), "right": randint(0,5000), "left": randint(0,5000)}
 
     def breackWalls(self, neighbour_x, neighbour_y):
         if self.x - neighbour_x == -1:

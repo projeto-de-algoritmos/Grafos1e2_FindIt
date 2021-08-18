@@ -38,7 +38,7 @@ class Maze:
         self.__checkNeighbourHeap(neighbours, x - 1, y, "up")
         self.__checkNeighbourHeap(neighbours, x, y + 1, "right")
         self.__checkNeighbourHeap(neighbours, x, y - 1, "left")
-        #random.shuffle(neighbours)
+        random.shuffle(neighbours)
         return neighbours
 
     def findPossiblePath(self, x, y):

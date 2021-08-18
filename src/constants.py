@@ -1,5 +1,6 @@
-SIZE = (50, 50)
+SIZE = (55, 100)
 START = (0, 0)
+FINAL = (54,99)
 
 CELL_SIZE = 6
 COLOR_CHANGE = 3

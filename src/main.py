@@ -1,6 +1,6 @@
 from maze import Maze
 from solver import mazeSolver
-from constants import SIZE, START, WIDTH, HEIGHT
+from constants import SIZE, START, WIDTH, HEIGHT, FINAL
 from graphics import *
 from generator import *
 import pygame
@@ -10,8 +10,9 @@ def main():
     initGame()
     pygame.display.set_mode((WIDTH, HEIGHT))
     maze = Maze(SIZE)
+    #primGenerator(maze, START)
     kruskalGenerator(maze)
-    path = mazeSolver(maze, START, (49, 49), False)
+    path = mazeSolver(maze, START, FINAL , True)
 
     node = path[0]
     while node[1] != START:
