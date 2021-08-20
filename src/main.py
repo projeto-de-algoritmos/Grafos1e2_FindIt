@@ -1,5 +1,5 @@
 from maze import Maze
-from solver import mazeSolver
+from solver import *
 from constants import SIZE, START, WIDTH, HEIGHT, FINAL
 from graphics import *
 from generator import *
@@ -10,9 +10,11 @@ def main():
     initGame()
     pygame.display.set_mode((WIDTH, HEIGHT))
     maze = Maze(SIZE)
+    #  mazeGenerator(maze, START, True)
     primGenerator(maze, START)
-    #kruskalGenerator(maze)
-    path = mazeSolver(maze, START, FINAL , True)
+    #  kruskalGenerator(maze)
+    #  path = mazeSolver(maze, START, FINAL , False)
+    path = aStarSolver(maze, START, FINAL)
 
     node = path[0]
     while node[1] != START:

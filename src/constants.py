@@ -1,4 +1,4 @@
-SIZE = (50, 90)
+SIZE = (50, 50)
 START = (0, 0)
 FINAL = (SIZE[0] - 1, SIZE[1] - 1)
 
