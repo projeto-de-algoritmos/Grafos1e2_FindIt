@@ -1,5 +1,6 @@
 from graphics import *
 import heapq as hp
+import random
 
 def mazeSolver(maze, startPoint, finishPoint, BFS_SEARCH):
     x_c, y_c = startPoint
@@ -37,8 +38,9 @@ def aStarSolver(maze, startPoint, finishPoint):
     hp.heappush(openList, (0, (0, 0), startPoint, startPoint))
 
     while openList:
-        _, _, (x_c, y_c), (x_n, y_n) = hp.heappop(openList)
-        path.append(((x_c, y_c), (x_n, y_n)))
+        _, (G_C, _), (x_c, y_c), (x_n, y_n) = hp.heappop(openList)
+        maze.graph[x_c][y_c].player = True
+        path.insert(0, ((x_n, y_n), (x_c, y_c)))
         gameDrawSolve((x_c, y_c), (x_n, y_n), [255, 255, 255])
 
         if (x_c, y_c) == finishPoint:
@@ -46,18 +48,8 @@ def aStarSolver(maze, startPoint, finishPoint):
 
         possiblePath = maze.findPossiblePath(x_c, y_c)
         for n in possiblePath:
-            if not maze.graph[x_c][y_c].player:
-                output = [i for i, v in enumerate(openList) if v[2] == n]
-                G = calculateDistance(n[0], n[1], finishPoint[0], finishPoint[1])
-                F = calculateDistance(n[0], n[1], startPoint[0], startPoint[1])
-                if not output:
-                    hp.heappush(openList, (F, (G, F+G), n, (x_c, y_c)))
-                else:
-                    node = openList[output[0]]
-                    if node[1][0] > G:
-                       node[1][0] = G
-                       node[0] = F
-                       node[1][1] = node[0] + G
-                       node[3] = (x_c, y_c)
-                       hp.heapify(openList)
-        maze.graph[x_c][y_c].player = True
+            if not maze.graph[n[0]][n[1]].player:
+                G = G_C + 1
+                F = calculateDistance(n[0], n[1], finishPoint[0], finishPoint[1])
+                H = G + F
+                hp.heappush(openList, (F, (G, H), n, (x_c, y_c)))
