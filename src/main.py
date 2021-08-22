@@ -30,7 +30,7 @@ def main():
     exit = False
     while not exit:
         return_Menu = menu()
-        
+
         maze = Maze(SIZE)
 
         if not return_Menu:
@@ -54,7 +54,6 @@ def main():
             path = path = mazeSolver(maze, START, FINAL , True)
 
         
-        pygame.display.set_mode((WIDTH, HEIGHT + 100))
 
         node = path[0]
         while node[1] != START:
