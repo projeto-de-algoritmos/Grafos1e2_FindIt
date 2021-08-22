@@ -28,6 +28,19 @@ class Maze:
         random.shuffle(neighbours)
         return neighbours
 
+    def __checkNeighbourHeap(self, neighbours, x, y, direction):
+        if x >= 0 and x < self.rows and y >= 0 and y < self.columns:
+            neighbours.append(((x, y), direction))
+
+    def findNeighboursHeap(self, x, y):
+        neighbours = []
+        self.__checkNeighbourHeap(neighbours, x + 1, y, "down")
+        self.__checkNeighbourHeap(neighbours, x - 1, y, "up")
+        self.__checkNeighbourHeap(neighbours, x, y + 1, "right")
+        self.__checkNeighbourHeap(neighbours, x, y - 1, "left")
+        random.shuffle(neighbours)
+        return neighbours
+
     def findPossiblePath(self, x, y):
         possiblePath = []
         if not self.graph[x][y].walls['up']:

@@ -1,5 +1,6 @@
 SIZE = (50, 80)
 START = (0, 0)
+FINAL = (SIZE[0] - 1, SIZE[1] - 1)
 
 CELL_SIZE = 6
 COLOR_CHANGE = 3
