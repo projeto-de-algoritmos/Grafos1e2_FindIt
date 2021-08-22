@@ -60,7 +60,6 @@ def union(matrizUnionFind, nodeA, nodeB):
     else:
         matrizUnionFind[nodeB[0]][nodeB[1]] = (nodeA, matrizUnionFind[nodeB[0]][nodeB[1]][1])
         matrizUnionFind[nodeA[0]][nodeA[1]] = (nodeA, 1 + matrizUnionFind[nodeB[0]][nodeB[1]][1])
-    #print(matrizUnionFind[nodeA[0]][nodeA[1]][0], matrizUnionFind[nodeB[0]][nodeB[1]][0])
 
 def kruskalGenerator(maze):
     heap = []
@@ -76,7 +75,6 @@ def kruskalGenerator(maze):
     
     while heap:
         _, (x_c, y_c), (x_n, y_n) = hp.heappop(heap)
-        #print("A = {}, B = {}".format((x_c, y_c), (x_n,y_n)))
 
         a = find(matrizUnionFind, (x_c, y_c))
         b = find(matrizUnionFind, (x_n, y_n))

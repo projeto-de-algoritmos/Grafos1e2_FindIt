@@ -44,7 +44,7 @@ def gameDrawMaze(node, color):
         drawCell(color, (x+CELL_SIZE, y, CELL_SIZE, CELL_SIZE))
 
     pygame.display.update()
-    time.sleep(.0001)
+    time.sleep(.001)
 
 def gameDrawSolve(node_i, node_f, color):
     y_i = (node_i[0] * 2 + 1) * CELL_SIZE
