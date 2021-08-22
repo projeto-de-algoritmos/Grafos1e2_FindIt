@@ -33,8 +33,8 @@
 </p>
 </details>
 
-<details>
-<summary open> Grafos 2</summary>
+<details open>
+<summary> Grafos 2</summary>
 
 ### Gerando labirintos (Prim e Kruskal)
 <p>
@@ -43,9 +43,9 @@
 </p>
 
 ### Resolvendo labirintos (A\* em um Prim)
-<p>
+<center><p>
     <img src="assets/aStar.gif" width="400" height="400" />
-</p>
+</p></center>
 
 </details>
 
